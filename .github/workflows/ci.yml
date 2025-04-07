@@ -1,4 +1,4 @@
-name: React CI/CD
+name: React Vite CI/CD
 
 on:
   push:
@@ -10,40 +10,35 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Run on Ubuntu
+    runs-on: ubuntu-latest  # You can change this to macos-latest or windows-latest
 
     steps:
-      # Step 1: Checkout the code
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js 20 (using Node.js 20)
-      - name: Set up Node.js 20
+      # Step 2: Set up Node.js (ensure correct version)
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: '20'  # Ensure you're using Node.js version 20
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install  # This will install dependencies in your 'package.json'
+        run: npm install
 
-      # Step 4: Run tests (optional)
-      # Uncomment the next lines if you want to run tests
-      # - name: Run tests
-      #   run: npm test
-
-      # Step 5: Build the app
+      # Step 4: Build the app
       - name: Build app
-        run: npm run build  # Runs 'vite build', which generates the 'dist/' directory
+        run: npm run build  # This will execute 'vite build' and generate the 'dist/' folder
 
-      # Step 6: List build directory contents (optional)
+      # Step 5: List the contents of 'dist/' directory
       - name: List dist directory contents
-        run: ls -al dist/  # Verify the dist folder exists and contains the output files
+        run: ls -al dist/  # Check the 'dist' folder contains built files
 
-      # Step 7: Deploy to GitHub Pages
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # The branch to deploy to
+          branch: gh-pages  # The branch to deploy to (gh-pages)
           folder: dist      # Folder containing the production build (Vite uses 'dist')
-          token: ${{ secrets.GH_TOKEN }}  # Use the custom PAT for authentication
+          token: ${{ secrets.GH_TOKEN }}  # Personal Access Token (PAT) secret
