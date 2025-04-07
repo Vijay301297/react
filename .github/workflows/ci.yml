@@ -3,43 +3,45 @@ name: React CI/CD
 on:
   push:
     branches:
-      - main  # Trigger the action when pushing to the 'main' branch
+      - main  # Trigger when pushing to the 'main' branch
   pull_request:
     branches:
-      - main  # Trigger the action for pull requests to the 'main' branch
+      - main  # Trigger for pull requests targeting 'main'
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can specify the OS to run on
+    runs-on: ubuntu-latest  # Run on Ubuntu, but you can choose others like 'macos-latest' or 'windows-latest'
     steps:
-      # Checkout the repository
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Set up Node.js
-      - name: Set up Node.js
+      # Step 2: Set up Node.js 20
+      - name: Set up Node.js 20
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Set the Node.js version you are using
+          node-version: '20'  # Using Node.js version 20
 
-      # Install dependencies
+      # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm install  # This will install dependencies in your 'package.json'
 
-      # Run tests (optional)
+      # Step 4: Run tests (optional)
       - name: Run tests
-        run: npm test
+        run: npm test  # Optional step, runs tests in your React app
 
-      # Build the React app
+      # Step 5: Build the app
       - name: Build app
-        run: npm run build
+        run: npm run build  # Run the build command to create a production build
 
-      # Deploy the build (optional step)
-      # Here, you would deploy to a platform like GitHub Pages, Vercel, or Netlify.
-      # Example for GitHub Pages deployment:
+      # Step 6: List build directory contents (optional)
+      - name: List build directory contents
+        run: ls -al build/  # Verify the build folder exists and contains the output files
+
+      # Step 7: Deploy to GitHub Pages (optional, replace this with your deployment method)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # The branch to deploy to (usually 'gh-pages')
-          folder: build     # Folder containing the built app
-          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+          branch: gh-pages  # The branch to deploy to
+          folder: build     # Folder containing the production build
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token for authentication
