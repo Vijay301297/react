@@ -15,11 +15,11 @@ jobs:
     steps:
       # Step 1: Checkout code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to the latest version
 
       # Step 2: Set up Node.js (ensure correct version)
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3  # Updated to the latest version
         with:
           node-version: '20'  # Ensure you're using Node.js version 20
 
@@ -37,7 +37,7 @@ jobs:
 
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4  # No change needed, this is the latest stable version
         with:
           branch: gh-pages  # The branch to deploy to (gh-pages)
           folder: dist      # Folder containing the production build (Vite uses 'dist')
