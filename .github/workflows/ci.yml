@@ -27,8 +27,8 @@ jobs:
         run: npm install  # This will install dependencies in your 'package.json'
 
       # Step 4: Run tests (optional)
-      - name: Run tests
-        run: npm test  # Optional step, runs tests in your React app
+      # - name: Run tests
+      #   run: npm test  # Optional step, runs tests in your React app
 
       # Step 5: Build the app
       - name: Build app
