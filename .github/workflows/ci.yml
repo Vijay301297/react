@@ -45,4 +45,4 @@ jobs:
         with:
           branch: gh-pages  # The branch to deploy to
           folder: dist      # Folder containing the production build (Vite uses 'dist')
-          token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token for authentication
+          token: ${{ secrets.GH_TOKEN }}  # Use GitHub token for authentication
