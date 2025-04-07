@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Run on Ubuntu, but you can choose others like 'macos-latest' or 'windows-latest'
-    
+    runs-on: ubuntu-latest  # Run on Ubuntu
+
     steps:
       # Step 1: Checkout the code
       - name: Checkout code
