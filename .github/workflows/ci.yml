@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Run on Ubuntu, but you can choose others like 'macos-latest' or 'windows-latest'
+    runs-on: ubuntu-latest  # Run on Ubuntu
+
     steps:
       # Step 1: Checkout code
       - name: Checkout code
@@ -20,7 +21,7 @@ jobs:
       - name: Set up Node.js 20
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Using Node.js version 20
+          node-version: '20'
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -32,16 +33,16 @@ jobs:
 
       # Step 5: Build the app
       - name: Build app
-        run: npm run build  # Run the build command to create a production build
+        run: npm run build  # Runs 'vite build', which generates the 'dist/' directory
 
       # Step 6: List build directory contents (optional)
-      - name: List build directory contents
-        run: ls -al build/  # Verify the build folder exists and contains the output files
+      - name: List dist directory contents
+        run: ls -al dist/  # Verify the dist folder exists and contains the output files
 
       # Step 7: Deploy to GitHub Pages (optional, replace this with your deployment method)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # The branch to deploy to
-          folder: build     # Folder containing the production build
+          folder: dist      # Folder containing the production build (Vite uses 'dist')
           token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token for authentication
