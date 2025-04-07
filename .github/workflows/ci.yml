@@ -1,0 +1,45 @@
+name: React CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Trigger the action when pushing to the 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger the action for pull requests to the 'main' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can specify the OS to run on
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Set the Node.js version you are using
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests (optional)
+      - name: Run tests
+        run: npm test
+
+      # Build the React app
+      - name: Build app
+        run: npm run build
+
+      # Deploy the build (optional step)
+      # Here, you would deploy to a platform like GitHub Pages, Vercel, or Netlify.
+      # Example for GitHub Pages deployment:
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # The branch to deploy to (usually 'gh-pages')
+          folder: build     # Folder containing the built app
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
