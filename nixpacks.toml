@@ -9,4 +9,4 @@ cmds = ["corepack enable", "npm install"]
 cmds = ["npm run build"]
  
 [start]
-cmd = "npm run preview"
+cmd = "npm run preview -- --host --port 4173"
